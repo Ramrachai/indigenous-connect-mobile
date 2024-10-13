@@ -1,94 +1,80 @@
-# Indigenous Connect MOBILE APP
+This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-## Overview
+# Getting Started
 
-**Indigenous Connect** is a web application designed to foster unity and connectivity among the indigenous people of Bangladesh, including communities such as Marma, Chakma, Khasia, Garo, Manipuri, Tripura, and others. Our goal is to provide a platform where members of these communities can connect, share, and collaborate to strengthen their cultural identity and promote inclusivity.
+>**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
-## Live Demo
+## Step 1: Start the Metro Server
 
-You can access the live version of the application at [iconnect.ramrachai.com](http://iconnect.ramrachai.com).
+First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
 
-## Technologies Used
+To start Metro, run the following command from the _root_ of your React Native project:
 
-Indigenous Connect is built using modern web technologies, including:
+```bash
+# using npm
+npm start
 
-| Frontend              | Backend                | Infrastructure  | CI/CD                          |
-|-----------------------|------------------------|-----------------|-------------------------------|
-| Next.js 14            | Express.js (TypeScript)| AWS EC2         | GitHub Action (Self-hosted runner) |
-| ShadCN                | MongoDB                | AWS S3          |                               |
-| Zod                   | Zod                    | Nginx           |                               |
-| Tailwind CSS          | Multer                 |                 |                               |
-| React Hook Form       | Nodemailer             |                 |                               |
-| Next Auth             | JSON Web Token (JWT)   |                 |                               |
-| TypeScript            | pnpm                   |                 |                               |
+# OR using Yarn
+yarn start
+```
 
+## Step 2: Start your Application
 
+Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
 
+### For Android
 
+```bash
+# using npm
+npm run android
 
-## Features
+# OR using Yarn
+yarn android
+```
 
-- **Social Media-like Posts**: Users can create, share, and interact with posts, fostering community engagement.
-- **Live Chat**: Supports both group and private chat functionalities for real-time communication.
-- **Events**: Users can create and participate in events, enhancing community involvement.
-- **Authentication**: Secure user authentication to manage accounts and profiles.
-- **Notice Board**: A centralized place for important announcements and notices relevant to the community.
-- **Ideas**: A feature for users to share and discuss ideas that promote the well-being and unity of indigenous communities.
+### For iOS
 
-## Installation
+```bash
+# using npm
+npm run ios
 
-To set up the project locally, follow these steps:
+# OR using Yarn
+yarn ios
+```
 
-1. **Clone the repository**:
+If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-   ```bash
-   git clone <repository-url>
-   cd indigenous-connect
-   ```
+This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-2. **Install dependencies using pnpm**:
+## Step 3: Modifying your App
 
-   ```bash
-   pnpm install
-   ```
+Now that you have successfully run the app, let's modify it.
 
-3. **Create a `.env` file**:
+1. Open `App.tsx` in your text editor of choice and edit some lines.
+2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
 
-   Please contact me for the necessary `.env` file to configure the environment variables.
+   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
 
-4. **Run the development server**:
+## Congratulations! :tada:
 
-   ```bash
-   pnpm run dev
-   ```
+You've successfully run and modified your React Native App. :partying_face:
 
-   The application should now be running on [http://localhost:3000](http://localhost:3000).
+### Now what?
 
-# Note
-This project might not have the most cutting-edge code you'll find online, but it works! My goal here isn’t to create something revolutionary or to write the most efficient, scalable, or high-quality code ever. Instead, the main focus is to encourage members of the indigenous community to contribute—even if it’s just a single line of code.
+- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
+- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
 
-I’m keeping things simple and accessible. You won’t find overly complex tech stacks, advanced coding techniques, or intricate abstractions here. I avoid creating too much reusable code or forcing people to dig through endless folders just to make a simple service. I try to keep all related code in one file or close by. The idea is to make it easy for anyone with basic coding skills to jump in and contribute.
+# Troubleshooting
 
-Oh, and feel free to use AI tools for coding assistance! The goal is to create something together, no matter how big or small your contribution may be.
+If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
-## Contributing
+# Learn More
 
-We welcome contributions to improve Indigenous Connect! If you have ideas for features or improvements, feel free to submit a pull request or open an issue.
+To learn more about React Native, take a look at the following resources:
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a new Pull Request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-## Contact
-
-For any inquiries or to request the `.env` file, please contact:
-
-- [Ramrachai Marma email](mailto:ramrachaim@gmail.com)
-- [Website](https://ramrachai.com)
-- +8801732900565 : Whatsapp
+- [React Native Website](https://reactnative.dev) - learn more about React Native.
+- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
+- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
+- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
+- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+# iConnect
