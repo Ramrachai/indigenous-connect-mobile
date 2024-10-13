@@ -1,0 +1,17 @@
+{
+  "Use AsyncEffect": {
+    "prefix": "ase",
+    "body": [
+      "  useAsyncEffect(",
+      "    async (isMounted) => {",
+      "      if (!isMounted()) {",
+      "        return null;",
+      "      }",
+      "      //api call here",
+      "    },",
+      "    [isFocused]",
+      "  );"
+    ],
+    "description": "Use AsyncEffect"
+  }
+}
