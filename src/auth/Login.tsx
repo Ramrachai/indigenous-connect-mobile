@@ -6,6 +6,7 @@ import CustomInput from '../common/components/CustomInput';
 import {useToast} from '../common/components/CustomToast';
 import Row from '../common/components/Row';
 import {httpRequest} from '../common/constant/httpRequest';
+import {SIZES} from '../common/constant/Themes';
 import {api} from '../utils/api';
 
 const Login = () => {
@@ -64,7 +65,8 @@ export default Login;
 
 const styles = StyleSheet.create({
   main: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: SIZES.height / 3,
   },
   pass: {
     marginTop: 16,

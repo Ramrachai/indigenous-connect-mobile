@@ -5,6 +5,7 @@ import {
 import React from 'react';
 import Loader from '../auth/Loader';
 import Login from '../auth/Login';
+import {StatusBar} from 'react-native';
 
 export type RootStackScreensParams = {
   Loader: undefined | {delay?: number; text?: string};

@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/native';
 import {observer} from 'mobx-react-lite';
 import React, {useCallback, useMemo, useRef} from 'react';
-import {Linking} from 'react-native';
+import {Linking, StatusBar} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
 import {MD3Theme, PaperProvider} from 'react-native-paper';
 import {
@@ -22,6 +22,7 @@ import DefaultTheme from './src/common/themes/DefaultTheme';
 import RootStack, {RootStackScreensParams} from './src/navigations/RootStack';
 import {RootStoreProvider, useRootStore} from './src/stores/rootStore';
 import axios from 'axios';
+import {COLORS} from './src/common/constant/Themes';
 
 export const BaseURL = baseURLL;
 export const secureStorageKey = secureStorageKeyy;
@@ -63,7 +64,6 @@ const Main = observer(() => {
     }
     return DefaultTheme;
   }, [isDark]);
-
   const onReady = useCallback(async () => {
     try {
       const uri = await Linking.getInitialURL();
@@ -86,6 +86,10 @@ const Main = observer(() => {
             theme={theme}
             ref={nav}
             onReady={onReady}>
+            <StatusBar
+              barStyle={isDark ? 'light-content' : 'dark-content'}
+              backgroundColor={isDark ? COLORS.black : COLORS.white}
+            />
             <RootStack />
           </NavigationContainer>
         </ToastProvider>
