@@ -62,10 +62,11 @@ const CustomInput = ({
           <Fragment>
             <View>
               <TextInput
-                style={[textInputStyle]}
+                style={[textInputStyle, styles.box]}
                 mode="outlined"
-                label={label}
+                label={value ? label : ''}
                 placeholder={placeholder || 'Type something'}
+                placeholderTextColor={theme.colors.primary}
                 outlineColor={error ? theme.colors.error : theme.colors.primary}
                 activeOutlineColor={theme.colors.primary}
                 multiline={multiline}
@@ -97,4 +98,6 @@ const CustomInput = ({
 
 export default CustomInput;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  box: {},
+});
