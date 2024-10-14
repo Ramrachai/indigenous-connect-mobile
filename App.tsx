@@ -3,12 +3,13 @@ import {
   LinkingOptions,
   NavigationContainer,
   NavigationContainerRef,
+  Theme,
 } from '@react-navigation/native';
 import {observer} from 'mobx-react-lite';
 import React, {useCallback, useMemo, useRef} from 'react';
 import {Linking} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
-import {PaperProvider} from 'react-native-paper';
+import {MD3Theme, PaperProvider} from 'react-native-paper';
 import {
   initialWindowMetrics,
   SafeAreaProvider,
@@ -52,7 +53,7 @@ const Main = observer(() => {
   const {hydrate} = useRootStore();
   const nav = useRef<NavigationContainerRef<RootStackScreensParams>>(null);
   const [isDark] = useIsDarkTheme();
-  const theme = useMemo(() => {
+  const theme: Theme & MD3Theme = useMemo(() => {
     if (isDark) {
       return DarkTheme;
     }
