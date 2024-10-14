@@ -13,5 +13,24 @@
       "  );"
     ],
     "description": "Use AsyncEffect"
+  },
+  "When you call api, this is the argument of httpRequest.": {
+    "prefix": "api",
+    "body": [
+      "  const api_params = {",
+      "    url: '/example/api', // required field, string type",
+      "    data: {key: 'value'}, // optional, ***this will be object type",
+      "    method: 'post', // optional, string type",
+      "    baseURL: 'https://www.example.com/', // optional, string type",
+      "    isConsole: true, // optional, boolean type",
+      "    mediaFile: res?.assets?.[0], // optional, object type",
+      "    isParamsAndmediaFile: true, // optional, boolean type",
+      "    isEncrypted: true, // optional, boolean type",
+      "    isPostOrPutWithParams: true, // optional, boolean type",
+      "    isBaseURLAndURLSame: true, // optional, boolean type",
+      "  };",
+      "  const res = await httpRequest(api_params, () => {});"
+    ],
+    "description": "When you call api, this is the argument of httpRequest."
   }
 }
