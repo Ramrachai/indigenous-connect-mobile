@@ -1,4 +1,4 @@
-import {baseURLL, secureStorageKeyy} from '@env';
+import {baseURLL, secretKeyy, secureStorageKeyy} from '@env';
 import {
   LinkingOptions,
   NavigationContainer,
@@ -21,9 +21,13 @@ import DarkTheme from './src/common/themes/DarkTheme';
 import DefaultTheme from './src/common/themes/DefaultTheme';
 import RootStack, {RootStackScreensParams} from './src/navigations/RootStack';
 import {RootStoreProvider, useRootStore} from './src/stores/rootStore';
+import axios from 'axios';
 
 export const BaseURL = baseURLL;
 export const secureStorageKey = secureStorageKeyy;
+export const secretKey = secretKeyy;
+
+axios.defaults.baseURL = BaseURL;
 
 const linking: LinkingOptions<any> = {
   prefixes: [
