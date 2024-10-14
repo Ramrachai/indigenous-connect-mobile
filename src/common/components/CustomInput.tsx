@@ -1,7 +1,7 @@
 import {useTheme} from '@react-navigation/native';
 import React, {Fragment} from 'react';
 import {Controller} from 'react-hook-form';
-import {KeyboardTypeOptions, StyleSheet, View} from 'react-native';
+import {Keyboard, KeyboardTypeOptions, StyleSheet, View} from 'react-native';
 import {TextInput, useTheme as paperTheme} from 'react-native-paper';
 
 interface Props {
@@ -79,12 +79,24 @@ const CustomInput = ({
                 onChangeText={e => handleChange(e)}
                 right={
                   rightIcon ? (
-                    <TextInput.Icon icon={rightIcon} onPress={rightIconPress} />
+                    <TextInput.Icon
+                      icon={rightIcon}
+                      onPress={() => {
+                        Keyboard.dismiss();
+                        rightIconPress && rightIconPress();
+                      }}
+                    />
                   ) : null
                 }
                 left={
                   leftIcon ? (
-                    <TextInput.Icon icon={leftIcon} onPress={leftIconPress} />
+                    <TextInput.Icon
+                      icon={leftIcon}
+                      onPress={() => {
+                        Keyboard.dismiss();
+                        leftIconPress && leftIconPress();
+                      }}
+                    />
                   ) : null
                 }
               />
