@@ -24,7 +24,6 @@ const Login = () => {
       isConsole: true,
     };
     const res = await httpRequest(api_params, () => {});
-
     // toaster.show({message: res?.message, type: 'warning'});
     // console.log(JSON.stringify(res, null, 2));
   };
