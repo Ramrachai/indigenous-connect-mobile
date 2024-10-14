@@ -1,118 +1,100 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import {baseURLL, secureStorageKeyy} from '@env';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
+  LinkingOptions,
+  NavigationContainer,
+  NavigationContainerRef,
+} from '@react-navigation/native';
+import {observer} from 'mobx-react-lite';
+import React, {useCallback, useMemo, useRef} from 'react';
+import {Linking} from 'react-native';
+import BootSplash from 'react-native-bootsplash';
+import {PaperProvider} from 'react-native-paper';
 import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  initialWindowMetrics,
+  SafeAreaProvider,
+} from 'react-native-safe-area-context';
+import {ToastProvider} from './src/common/components/CustomToast';
+import useIsDarkTheme from './src/common/hooks/useIsDarkTheme';
+import delay from './src/common/services/delay';
+import DarkTheme from './src/common/themes/DarkTheme';
+import DefaultTheme from './src/common/themes/DefaultTheme';
+import RootStack, {RootStackScreensParams} from './src/navigations/RootStack';
+import {RootStoreProvider, useRootStore} from './src/stores/rootStore';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+export const BaseURL = baseURLL;
+export const secureStorageKey = secureStorageKeyy;
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const linking: LinkingOptions<any> = {
+  prefixes: [
+    /* your linking prefixes */
+    BaseURL,
+  ],
+  config: {
+    /* configuration for matching screens with paths */
+    initialRouteName: 'Loader',
+    screens: {
+      Loader: {
+        path: 'loader/:delay?/:text?',
+        parse: {
+          delay: ms => Number(ms),
+          text: text => decodeURIComponent(text),
+        },
+        stringify: {
+          delay: ms => String(ms),
+          text: text => encodeURIComponent(text),
+        },
+      },
+    },
+  },
+};
+
+const Main = observer(() => {
+  const {hydrate} = useRootStore();
+  const nav = useRef<NavigationContainerRef<RootStackScreensParams>>(null);
+  const [isDark] = useIsDarkTheme();
+  const theme = useMemo(() => {
+    if (isDark) {
+      return DarkTheme;
+    }
+    return DefaultTheme;
+  }, [isDark]);
+
+  const onReady = useCallback(async () => {
+    try {
+      const uri = await Linking.getInitialURL();
+      if (uri) {
+        await delay(500);
+        await hydrate();
+        BootSplash.hide({fade: true});
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [hydrate]);
+
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <PaperProvider theme={theme}>
+        <ToastProvider>
+          <NavigationContainer
+            linking={linking}
+            theme={theme}
+            ref={nav}
+            onReady={onReady}>
+            <RootStack />
+          </NavigationContainer>
+        </ToastProvider>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
 });
+
+const App = () => {
+  return (
+    <RootStoreProvider>
+      <Main />
+    </RootStoreProvider>
+  );
+};
 
 export default App;
