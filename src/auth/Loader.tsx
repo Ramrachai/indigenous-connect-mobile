@@ -1,9 +1,11 @@
+import {useTheme} from '@react-navigation/native';
 import {observer} from 'mobx-react-lite';
 import React, {useEffect} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StatusBar, StyleSheet, Text} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
-import {useTheme} from 'react-native-paper';
+import {useTheme as paperTheme} from 'react-native-paper';
 import CustomContainer from '../common/components/CustomContainer';
+import {COLORS} from '../common/constant/Themes';
 import delay from '../common/services/delay';
 import {RootStackScreenProp} from '../navigations/RootStack';
 import {useRootStore} from '../stores/rootStore';
@@ -11,7 +13,7 @@ import {useRootStore} from '../stores/rootStore';
 const Loader = observer<RootStackScreenProp<'Loader'>>(
   ({navigation, route}) => {
     const {hydrate, hydrated} = useRootStore();
-    const theme: any = useTheme();
+    const theme: any = useTheme() && paperTheme();
 
     useEffect(() => {
       if (hydrated) {
@@ -35,7 +37,11 @@ const Loader = observer<RootStackScreenProp<'Loader'>>(
       })();
     }, [hydrate, hydrated]);
     return (
-      <CustomContainer style={styles.main}>
+      <CustomContainer
+        style={styles.main}
+        header={
+          <StatusBar barStyle={'dark-content'} backgroundColor={COLORS.white} />
+        }>
         <Text
           style={{
             color: theme.colors.text,
