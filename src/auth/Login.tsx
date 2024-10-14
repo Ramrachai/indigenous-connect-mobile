@@ -1,23 +1,27 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
-import {useTheme} from 'react-native-paper';
+import {useForm} from 'react-hook-form';
+import {StyleSheet} from 'react-native';
 import CustomContainer from '../common/components/CustomContainer';
+import CustomInput from '../common/components/CustomInput';
 
 const Login = () => {
-  const theme: any = useTheme();
-
+  const {control, handleSubmit, setValue, reset} = useForm();
   return (
-    <CustomContainer>
-      <Text
-        style={{
-          color: theme.colors.text,
-        }}>
-        This is login screen
-      </Text>
+    <CustomContainer style={styles.main}>
+      <CustomInput
+        control={control}
+        name={'Login'}
+        label="Email or Phone number"
+        setValue={setValue}
+      />
     </CustomContainer>
   );
 };
 
 export default Login;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  main: {
+    padding: 16,
+  },
+});
